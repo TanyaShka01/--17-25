@@ -11,7 +11,9 @@ grep -v '^#' /etc/protocols | awk 'NF>=2 {printf "%-4d%s\n", $2, $
 ## Задание 3:
 
 nano reg
+
 -------------------------
+
 #! /bin/bash
 
 text="$*"
@@ -22,6 +24,7 @@ Line=$(printf '%*s' "$((len + 2))" '' | tr ' ' '-')
 echo "+${line}+"
 echo "| ${text} |"
 echo "+${line}+"
+
 ------------------------------
 
 chmod +x banner
@@ -30,6 +33,7 @@ chmod +x banner
 ## Задание 5:
 
 nano reg
+
 -----------------------------
 
 #!/bin/bash
@@ -76,14 +80,14 @@ which banner
 ## Задание 6: 
 
 nano check_comment.sh
+
 -----------------------------------------------------------
 
 #!/bin/bash
 
 find . -type f \( -name "*.c" -o -name "*.js" -o -name "*.py" \) | while read -r file; do
-    # Читаем первую строку файла
     first_line=$(head -n 1 "$file")
-    
+
     if [[ "$first_line" =~ ^[[:space:]]*// ]] || [[ "$first_line" =~ ^[[:space:]]*# ]]; then
         echo "[ЕСТЬ КОММЕНТАРИЙ] $file"
     else
