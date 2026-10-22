@@ -257,3 +257,97 @@ find "$TARGET_DIR" -type f -empty -printf "%f\n"
 
 chmod +x find_empty.sh
 ./find_empty.sh /path/to/folder
+
+
+## Практика 1
+
+class ShellEmulator:
+    def __init__(self, vfs_name="VFS"):
+        self.vfs_name = vfs_name
+        self.running = True
+
+        self.commands = {
+            "help": self.help_command,
+            "exit": self.exit_command,
+            "ls": self.stub_command,
+            "cd": self.stub_command,
+            "pwd": self.stub_command,
+            "cat": self.stub_command,
+        }
+
+    def parse(self, line):
+        """Разделить строку на команду и аргументы по пробелам."""
+        parts = line.split()
+
+        if not parts:
+            return None, []
+
+        command = parts[0]
+        arguments = parts[1:]
+
+        return command, arguments
+
+    def execute(self, command, arguments):
+        """Найти обработчик команды и выполнить его."""
+        handler = self.commands.get(command)
+
+        if handler is None:
+            print(f"{command}: команда не найдена")
+            return
+
+        handler(command, arguments)
+
+    def help_command(self, command, arguments):
+        if arguments:
+            print("Использование: help")
+            return
+
+        print("Доступные команды:")
+        print("  help  — показать справку")
+        print("  exit  — завершить работу")
+        print("  ls    — список файлов (заглушка)")
+        print("  cd    — переход в каталог (заглушка)")
+        print("  pwd   — текущий каталог (заглушка)")
+        print("  cat   — содержимое файла (заглушка)")
+
+    def exit_command(self, command, arguments):
+        if arguments:
+            print("Использование: exit")
+            return
+
+        self.running = False
+
+    def stub_command(self, command, arguments):
+        """Показать результат разбора введённой команды."""
+        print(f"Команда: {command}")
+        print(f"Аргументы: {arguments}")
+        print("Функция пока не реализована.")
+
+    def run(self):
+        """REPL: чтение ввода, выполнение команды, вывод результата."""
+        print("Эмулятор командной оболочки UNIX")
+        print("Введите help для справки, exit для выхода.")
+
+        while self.running:
+            try:
+                line = input(f"{self.vfs_name}:/$ ")
+                command, arguments = self.parse(line)
+
+                if command is not None:
+                    self.execute(command, arguments)
+
+            except EOFError:
+                # Завершение ввода: Ctrl+D в UNIX,
+                # Ctrl+Z, затем Enter в Windows.
+                print()
+                break
+
+            except KeyboardInterrupt:
+                # Ctrl+C отменяет текущий ввод.
+                print()
+
+        print("Работа эмулятора завершена.")
+        
+if __name__ == "__main__":
+    emulator = ShellEmulator(vfs_name="VFS")
+    emulator.run()
