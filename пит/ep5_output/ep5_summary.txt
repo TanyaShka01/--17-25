@@ -1,0 +1,14 @@
+Этап 5: Визуализация графа зависимостей
+max_depth = 2
+mode = local
+output_format = svg
+package_name = samplepkg
+package_version = 1.0.0
+repo_url = /path/to/test_repo
+
+Mermaid-код:
+graph TD
+    samplepkg --> requests
+    requests --> urllib3
+    requests --> certifi
+    samplepkg --> pyyaml

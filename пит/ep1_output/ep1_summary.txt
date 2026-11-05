@@ -1,0 +1,13 @@
+Этап 1: минимальный прототип
+max_depth = 2
+mode = local
+output_format = ascii_tree
+package_name = samplepkg
+package_version = 1.0.0
+repo_url = /path/to/test_repo
+
+ASCII-дерево зависимостей:
+samplepkg
+└─ depA
+   └─ depA1
+└─ depB
