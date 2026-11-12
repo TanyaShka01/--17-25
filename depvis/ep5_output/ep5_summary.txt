@@ -1,0 +1,16 @@
+Этап 5: Визуализация графа зависимостей
+
+max_depth = 2
+mode = local
+output_format = svg
+package_name = samplepkg
+package_version = 1.0.0
+repo_url = /path/to/test_repo
+
+Узлов в графе: 5
+
+graph TD
+    samplepkg --> requests
+    samplepkg --> pyyaml
+    requests --> urllib3
+    requests --> certifi
