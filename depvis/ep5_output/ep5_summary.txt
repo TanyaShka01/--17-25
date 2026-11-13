@@ -2,15 +2,13 @@
 
 max_depth = 2
 mode = local
-output_format = svg
-package_name = samplepkg
-package_version = 1.0.0
-repo_url = /path/to/test_repo
+output_format = ascii_tree
+package_name = flask
+package_version = 2.0.0
+repo_url = test_repo.json
 
-Узлов в графе: 5
+Узлов в графе: 3
 
-graph TD
-    samplepkg --> requests
-    samplepkg --> pyyaml
-    requests --> urllib3
-    requests --> certifi
+flask
+├─ dependency_A
+└─ dependency_B

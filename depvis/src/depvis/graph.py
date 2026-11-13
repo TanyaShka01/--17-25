@@ -4,8 +4,9 @@
 def get_dependencies(pkg_name):
     """Возвращает граф зависимостей пакета.
 
-    Заглушка этапа 5: реальный парсер пакетных менеджеров появится
-    позже, сейчас нужен только корректный словарь узлов и связей.
+    Заглушка этапа 5: реальный парсер пакетных
+    менеджеров появится позже, сейчас нужен только
+    корректный словарь узлов и связей.
     """
     graphs = {
         'samplepkg': {
@@ -28,6 +29,9 @@ def get_dependencies(pkg_name):
 
 
 def unvisited_children(graph, node, visited):
-    """Возвращает дочерние узлы, которые ещё не обработаны."""
+    """Возвращает дочерние узлы, которые ещё
+    не обработаны."""
     children = graph['deps'].get(node, [])
-    return [child for child in children if child not in visited]
+    return [
+        child for child in children if child not in visited
+    ]

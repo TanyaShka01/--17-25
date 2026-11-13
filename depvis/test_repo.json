@@ -1,0 +1,21 @@
+{
+  "flask==2.0.0": ["werkzeug==2.0.0", "jinja2==3.0.0", "click==8.0.0"],
+  "werkzeug==2.0.0": ["markupsafe==2.0.0"],
+  "jinja2==3.0.0": ["markupsafe==2.0.0"],
+  "click==8.0.0": [],
+  "markupsafe==2.0.0": [],
+  "django==3.2.0": ["sqlparse==0.4.0", "pytz==2021.1"],
+  "sqlparse==0.4.0": [],
+  "pytz==2021.1": [],
+  "requests==2.26.0": ["urllib3==1.26.0", "certifi==2021.5.30", "charset-normalizer==2.0.0"],
+  "urllib3==1.26.0": [],
+  "certifi==2021.5.30": [],
+  "charset-normalizer==2.0.0": [],
+  "numpy==1.21.0": [],
+  "pandas==1.3.0": ["numpy==1.21.0", "python-dateutil==2.8.0"],
+  "python-dateutil==2.8.0": ["six==1.16.0"],
+  "six==1.16.0": [],
+  "cyclic-a==1.0.0": ["cyclic-b==1.0.0"],
+  "cyclic-b==1.0.0": ["cyclic-c==1.0.0"],
+  "cyclic-c==1.0.0": ["cyclic-a==1.0.0"]
+}

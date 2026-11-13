@@ -1,10 +1,12 @@
-"""Форматы вывода графа: Mermaid, ASCII-дерево, plain."""
+"""Форматы вывода графа: Mermaid, ASCII-дерево,
+plain."""
 
 from depvis.graph import unvisited_children
 
 
 def mermaid_edges(graph, max_depth):
-    """Собирает уникальные связи графа в виде строк Mermaid."""
+    """Собирает уникальные связи графа в виде
+    строк Mermaid."""
     visited = {graph['root']}
     edges = []
     frontier = [(graph['root'], 0)]
@@ -22,13 +24,15 @@ def mermaid_edges(graph, max_depth):
 
 
 def generate_mermaid(graph, max_depth):
-    """Генерирует Mermaid-код для графа зависимостей."""
+    """Генерирует Mermaid-код для графа
+    зависимостей."""
     lines = ['graph TD'] + mermaid_edges(graph, max_depth)
     return '\n'.join(lines)
 
 
 def render_ascii_tree(graph, max_depth):
-    """Рисует дерево зависимостей псевдографикой."""
+    """Рисует дерево зависимостей
+    псевдографикой."""
     lines = [graph['root']]
     seen = {graph['root']}
     stack = [(graph['root'], 0, '')]
@@ -40,23 +44,29 @@ def render_ascii_tree(graph, max_depth):
         for index, child in enumerate(children):
             seen.add(child)
             last = index == len(children) - 1
-            lines.append(prefix + ('└─ ' if last else '├─ ') + child)
+            lines.append(
+                prefix + ('└─ ' if last else '├─ ') + child
+            )
             step = '   ' if last else '│  '
             stack.append((child, depth + 1, prefix + step))
     return '\n'.join(lines)
 
 
 def render_plain(graph):
-    """Выводит пары «пакет -> зависимость» обычным текстом."""
+    """Выводит пары «пакет -> зависимость»
+    обычным текстом."""
     lines = []
     for node in sorted(graph['deps']):
         for child in graph['deps'][node]:
             lines.append(f"{node} -> {child}")
-    return '\n'.join(lines) if lines else '(зависимостей нет)'
+    return '\n'.join(lines) if lines else (
+        '(зависимостей нет)'
+    )
 
 
 def render_graph(graph, cfg):
-    """Возвращает текст графа для выбранного формата вывода."""
+    """Возвращает текст графа для выбранного
+    формата вывода."""
     fmt = cfg['output_format']
     if fmt == 'ascii_tree':
         return render_ascii_tree(graph, cfg['max_depth'])

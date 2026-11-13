@@ -20,7 +20,8 @@ max_depth = 2
 
 @pytest.fixture
 def config_file(tmp_path):
-    """Создаёт временный INI-файл с корректными параметрами."""
+    """Создаёт временный INI-файл с корректными
+    параметрами."""
     path = tmp_path / 'config.ini'
     path.write_text(CONFIG_BODY, encoding='utf-8')
     return str(path)
@@ -34,16 +35,22 @@ def test_load_config_ok(config_file):
 
 
 def test_load_config_missing_file():
-    """Отсутствующий файл даёт FileNotFoundError."""
+    """Отсутствующий файл даёт
+    FileNotFoundError."""
     with pytest.raises(FileNotFoundError):
-        load_config(os.path.join('no', 'such', 'config.ini'))
+        load_config(
+            os.path.join('no', 'such', 'config.ini')
+        )
 
 
 def test_load_config_empty_value(tmp_path):
-    """Пустое значение попадает в список отсутствующих."""
+    """Пустое значение попадает в список
+    отсутствующих."""
     path = tmp_path / 'bad.ini'
-    body = CONFIG_BODY.replace('package_name = samplepkg',
-                               'package_name =')
+    body = CONFIG_BODY.replace(
+        'package_name = samplepkg',
+        'package_name ='
+    )
     path.write_text(body, encoding='utf-8')
     with pytest.raises(ValueError):
         load_config(str(path))
